@@ -28,7 +28,38 @@ public ObjectType [] intArray;
     }
 
     public ObjectType getMostCommonFromMerge(ObjectType[] arrayToMerge) {
-        return null;
+        ObjectType[] newArr = mergeArrays(intArray, arrayToMerge);
+        int min = Integer.MIN_VALUE;
+        int occ = 0;
+        ObjectType result = null;
+        for (int i =  0; i < newArr.length; i++)
+        {
+            occ = getNumberOfOccurrences(newArr[i]);
+            if (occ > min) {
+                min = occ;
+                result = newArr[i];
+            }
+        }
+        return (ObjectType) result;
+
+
+
+
+//        int reserve = 0;
+//        int count = 1;
+//        for (int i = 1; i < newArr.length; i++) {
+//            if (newArr[i] == newArr[reserve]){
+//                count++;
+//            } else {
+//                count--;
+//            }
+//            if (count == 0) {
+//                reserve = i;
+//                count = 1;
+//            }
+//        }
+//        return newArr[reserve];
+
     }
 
     public Integer getNumberOfOccurrences(Object valueToEvaluate) {
@@ -44,11 +75,11 @@ public ObjectType [] intArray;
     public ObjectType[] removeValue(Object valueToRemove) {
         int count = getNumberOfOccurrences(valueToRemove);
         ObjectType[] list = Arrays.copyOf(intArray, intArray.length - count);
+        int x = 0;
         for (int i = 0; i < intArray.length; i++) {
-            int x = 0;
             if(!(intArray[i].equals((valueToRemove)))) {
                 list[x] = intArray[i];
-                x+=1;
+                x++;
             }
         }
         return list;
@@ -64,4 +95,5 @@ public ObjectType [] intArray;
         System.arraycopy(c, 0, newArray, arr1length, arr2length);
         return newArray;
     }
+
 }
